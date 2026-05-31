@@ -1,0 +1,31 @@
+<svg width="1440" height="900" viewBox="0 0 1440 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1440" height="900" fill="#fff7ed"/>
+  <rect x="90" y="74" width="1260" height="752" rx="36" fill="#fffaf5" stroke="#fed7aa" stroke-width="4"/>
+  <rect x="90" y="74" width="1260" height="112" rx="36" fill="#ffffff"/>
+  <circle cx="158" cy="130" r="22" fill="#f97316"/>
+  <text x="198" y="141" fill="#1f2937" font-family="Inter, Arial, sans-serif" font-size="34" font-weight="800">Food del</text>
+  <rect x="1006" y="105" width="104" height="42" rx="21" fill="#ffedd5"/>
+  <text x="1033" y="133" fill="#9a3412" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="700">Menu</text>
+  <rect x="1130" y="105" width="144" height="42" rx="21" fill="#f97316"/>
+  <text x="1164" y="133" fill="#ffffff" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="800">Order now</text>
+  <text x="154" y="304" fill="#111827" font-family="Inter, Arial, sans-serif" font-size="68" font-weight="900">Fresh meals, fast delivery.</text>
+  <text x="158" y="366" fill="#6b7280" font-family="Inter, Arial, sans-serif" font-size="28" font-weight="500">Track orders, browse dishes, and checkout from a responsive MERN food platform.</text>
+  <rect x="158" y="424" width="204" height="62" rx="18" fill="#f97316"/>
+  <text x="210" y="464" fill="#ffffff" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="800">Explore menu</text>
+  <rect x="158" y="574" width="250" height="170" rx="28" fill="#ffffff" stroke="#fed7aa" stroke-width="3"/>
+  <circle cx="283" cy="628" r="42" fill="#fb923c"/>
+  <rect x="198" y="692" width="170" height="18" rx="9" fill="#fdba74"/>
+  <rect x="214" y="724" width="138" height="14" rx="7" fill="#fed7aa"/>
+  <rect x="458" y="574" width="250" height="170" rx="28" fill="#ffffff" stroke="#fed7aa" stroke-width="3"/>
+  <circle cx="583" cy="628" r="42" fill="#ef4444"/>
+  <rect x="498" y="692" width="170" height="18" rx="9" fill="#fca5a5"/>
+  <rect x="514" y="724" width="138" height="14" rx="7" fill="#fecaca"/>
+  <rect x="758" y="574" width="250" height="170" rx="28" fill="#ffffff" stroke="#fed7aa" stroke-width="3"/>
+  <circle cx="883" cy="628" r="42" fill="#f59e0b"/>
+  <rect x="798" y="692" width="170" height="18" rx="9" fill="#fcd34d"/>
+  <rect x="814" y="724" width="138" height="14" rx="7" fill="#fde68a"/>
+  <rect x="1040" y="262" width="220" height="220" rx="44" fill="#fff" stroke="#fed7aa" stroke-width="3"/>
+  <circle cx="1150" cy="372" r="72" fill="#fb923c"/>
+  <path d="M1116 374C1138 342 1165 342 1186 374" stroke="#fff7ed" stroke-width="18" stroke-linecap="round"/>
+  <path d="M1112 404H1188" stroke="#fff7ed" stroke-width="18" stroke-linecap="round"/>
+</svg>

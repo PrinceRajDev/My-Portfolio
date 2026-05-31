@@ -1,171 +1,98 @@
-import React, { useState } from 'react';
-import { Mail, Github, Linkedin, Send, User, AtSign, Instagram } from 'lucide-react';
-import emailjs from 'emailjs-com';
+import { Github, Linkedin, Mail, Phone, Send } from 'lucide-react';
+import type React from 'react';
 
-const ContactSection: React.FC = () => {
-  // State to store form data
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: ''
-  });
+interface ContactSectionProps {
+  formStatus: string;
+  handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
+}
 
-  // State to manage form submission status
-  const [formStatus, setFormStatus] = useState('');
-
-  // Handle input change
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  // Handle form submission
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setFormStatus('sending');
-
-    emailjs
-      .send(
-        'service_bgj7rqc', // Replace with your EmailJS service ID
-        'template_kt5a5tm', // Replace with your EmailJS template ID
-        {
-          to_name: "Prince Raj",
-          from_name: formData.name,
-          from_email: formData.email,
-          message: formData.message,
-        },
-        'fHcWg2g4OBFBFtBuj' // Replace with your EmailJS public key
-      )
-      .then(
-        () => {
-          setFormStatus('success');
-          setFormData({ name: '', email: '', message: '' }); // Reset form
-          setTimeout(() => setFormStatus(''), 3000);
-        },
-        (error) => {
-          console.error('Email sending failed:', error);
-          setFormStatus('error');
-        }
-      );
-  };
-
+const ContactSection = ({ formStatus, handleSubmit }: ContactSectionProps) => {
   return (
-    <section id="contact" className="relative py-20 px-4 bg-black/30">
-      <div className="max-w-4xl mx-auto">
-        <h2 className="text-4xl font-bold text-center mb-16 bg-gradient-to-r from-purple-400 to-pink-500 text-transparent bg-clip-text">
-          Get In Touch
-        </h2>
+    <section id="contact" className="bg-slate-950 px-4 py-20 text-white">
+      <div className="mx-auto grid max-w-6xl gap-10 lg:grid-cols-[0.85fr_1.15fr]">
+        <div>
+          <p className="text-sm font-semibold uppercase tracking-[0.28em] text-amber-300">Contact</p>
+          <h2 className="mt-3 text-3xl font-bold sm:text-4xl">Let us build something useful.</h2>
+          <p className="mt-5 leading-7 text-slate-300">
+            I am available for internships, entry-level full-stack roles, and project collaborations.
+            The fastest way to reach me is email or phone.
+          </p>
 
-        <div className="grid md:grid-cols-5 gap-12">
-          {/* Contact Details */}
-          <div className="md:col-span-2 space-y-8">
-            <div className="text-center md:text-left">
-              <h3 className="text-2xl font-semibold mb-6">Connect With Me</h3>
-              <div className="space-y-4">
-                <a
-                  href="mailto:praj01012003@gmail.com"
-                  className="flex items-center gap-4 text-gray-300 hover:text-purple-400 transition-colors"
-                >
-                  <div className="w-12 h-12 rounded-full bg-gray-800/50 flex items-center justify-center">
-                    <Mail className="w-6 h-6" />
-                  </div>
-                  <span>praj01012003@gmail.com</span>
-                </a>
-                <a
-                  href="https://github.com/vickyyadav12t"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-4 text-gray-300 hover:text-purple-400 transition-colors"
-                >
-                  <div className="w-12 h-12 rounded-full bg-gray-800/50 flex items-center justify-center">
-                    <Github className="w-6 h-6" />
-                  </div>
-                  <span>github.com/vickyyadav12t</span>
-                </a>
-                <a
-                  href="https://www.linkedin.com/in/prince-raj2003/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-4 text-gray-300 hover:text-purple-400 transition-colors"
-                >
-                  <div className="w-12 h-12 rounded-full bg-gray-800/50 flex items-center justify-center">
-                    <Linkedin className="w-6 h-6" />
-                  </div>
-                  <span>linkedin.com/in/prince-raj2003/</span>
-                </a>
-                <a
-                  href="https://www.instagram.com/prince.___yadav__?igsh=cTFsdGR3ZXhpcXo1"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-4 text-gray-300 hover:text-purple-400 transition-colors"
-                >
-                  <div className="w-12 h-12 rounded-full bg-gray-800/50 flex items-center justify-center">
-                    <Instagram className="w-6 h-6" />
-                  </div>
-                  <span>instagram.com/prince__.yadav__</span>
-                </a>
-              </div>
-            </div>
-          </div>
-
-          {/* Contact Form */}
-          <div className="md:col-span-3">
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="relative">
-                <User className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
-                <input
-                  type="text"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  placeholder="Your Name"
-                  required
-                  className="w-full bg-gray-800/50 rounded-lg px-10 py-3 outline-none focus:ring-2 focus:ring-purple-500 transition-all"
-                />
-              </div>
-              <div className="relative">
-                <AtSign className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
-                <input
-                  type="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  placeholder="Your Email"
-                  required
-                  className="w-full bg-gray-800/50 rounded-lg px-10 py-3 outline-none focus:ring-2 focus:ring-purple-500 transition-all"
-                />
-              </div>
-              <textarea
-                name="message"
-                value={formData.message}
-                onChange={handleChange}
-                placeholder="Your Message"
-                required
-                rows={5}
-                className="w-full bg-gray-800/50 rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-purple-500 transition-all"
-              ></textarea>
-              <button
-                type="submit"
-                disabled={formStatus === 'sending'}
-                className="group relative w-full bg-gradient-to-r from-purple-500 to-pink-500 text-white py-3 rounded-lg overflow-hidden transition-all hover:scale-[1.02]"
-              >
-                <span className="relative flex items-center justify-center gap-2">
-                  <Send className={`w-5 h-5 ${formStatus === 'sending' ? 'animate-ping' : ''}`} />
-                  {formStatus === 'sending' ? 'Sending...' : 'Send Message'}
-                </span>
-              </button>
-              {formStatus === 'success' && (
-                <div className="text-center text-green-400 animate-fade-in">
-                  Message sent successfully!
-                </div>
-              )}
-              {formStatus === 'error' && (
-                <div className="text-center text-red-400 animate-fade-in">
-                  Oops! Something went wrong. Try again.
-                </div>
-              )}
-            </form>
+          <div className="mt-8 space-y-4 text-slate-200">
+            <a className="flex items-center gap-3 hover:text-cyan-200" href="mailto:princeroy6371@gmail.com">
+              <Mail className="h-5 w-5 text-cyan-300" />
+              princeroy6371@gmail.com
+            </a>
+            <a className="flex items-center gap-3 hover:text-cyan-200" href="tel:+916203135782">
+              <Phone className="h-5 w-5 text-cyan-300" />
+              +91 6203135782
+            </a>
+            <a
+              className="flex items-center gap-3 hover:text-cyan-200"
+              href="https://github.com/PrinceRajDev"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Github className="h-5 w-5 text-cyan-300" />
+              github.com/PrinceRajDev
+            </a>
+            <a
+              className="flex items-center gap-3 hover:text-cyan-200"
+              href="https://linkedin.com/in/prince-raj2003/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Linkedin className="h-5 w-5 text-cyan-300" />
+              linkedin.com/in/prince-raj2003
+            </a>
           </div>
         </div>
+
+        <form onSubmit={handleSubmit} className="rounded-xl border border-white/10 bg-white/[0.04] p-5 shadow-2xl shadow-black/20">
+          <div className="grid gap-4 sm:grid-cols-2">
+            <label className="block">
+              <span className="text-sm font-medium text-slate-300">Name</span>
+              <input
+                required
+                name="name"
+                className="mt-2 w-full rounded-lg border border-white/10 bg-white/10 px-4 py-3 text-white outline-none transition placeholder:text-slate-500 focus:border-cyan-300"
+                placeholder="Your name"
+              />
+            </label>
+            <label className="block">
+              <span className="text-sm font-medium text-slate-300">Email</span>
+              <input
+                required
+                type="email"
+                name="email"
+                className="mt-2 w-full rounded-lg border border-white/10 bg-white/10 px-4 py-3 text-white outline-none transition placeholder:text-slate-500 focus:border-cyan-300"
+                placeholder="you@example.com"
+              />
+            </label>
+          </div>
+          <label className="mt-4 block">
+            <span className="text-sm font-medium text-slate-300">Message</span>
+            <textarea
+              required
+              name="message"
+              rows={6}
+              className="mt-2 w-full resize-none rounded-lg border border-white/10 bg-white/10 px-4 py-3 text-white outline-none transition placeholder:text-slate-500 focus:border-cyan-300"
+              placeholder="Tell me about the role, project, or idea."
+            />
+          </label>
+          <button
+            type="submit"
+            className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-cyan-300 px-5 py-3 font-semibold text-slate-950 transition hover:-translate-y-0.5 hover:bg-cyan-200"
+          >
+            <Send className="h-5 w-5" />
+            Send Message
+          </button>
+          {formStatus === 'success' && (
+            <p className="mt-4 rounded-lg bg-emerald-400/10 px-4 py-3 text-center text-sm font-medium text-emerald-200">
+              Your email app is opening with the message ready to send.
+            </p>
+          )}
+        </form>
       </div>
     </section>
   );

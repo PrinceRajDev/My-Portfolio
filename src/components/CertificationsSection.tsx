@@ -1,59 +1,41 @@
-import React from 'react';
-import { ExternalLink } from 'lucide-react';
-
-interface Certification {
-  title: string;
-  issuer: string;
-  date: string;
-  description: string;
-  verifyUrl: string;
-  previewImage: string;
-}
+import type { Certification } from '../App';
 
 interface CertificationsSectionProps {
   certifications: Certification[];
 }
 
-const CertificationsSection: React.FC<CertificationsSectionProps> = ({ certifications }) => {
+const CertificationsSection = ({ certifications }: CertificationsSectionProps) => {
   return (
-    <section id="certifications" className="relative py-20 px-4 bg-black/30">
-      <div className="max-w-6xl mx-auto">
-        <h2 className="text-4xl font-bold text-center mb-16 bg-gradient-to-r from-purple-400 to-pink-500 text-transparent bg-clip-text">
-          Certifications
-        </h2>
-  
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {certifications.map((certification, index) => (
-            <div
-              key={index}
-              className="group relative bg-gray-800/50 rounded-xl overflow-hidden transition-transform hover:-translate-y-2"
+    <section id="certifications" className="bg-white px-4 py-20 dark:bg-slate-900/50">
+      <div className="mx-auto max-w-6xl">
+        <div className="mb-10 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-[0.28em] text-cyan-700 dark:text-cyan-300">
+              Certifications
+            </p>
+            <h2 className="mt-3 text-3xl font-bold text-slate-950 sm:text-4xl dark:text-white">
+              Proof of continuous learning
+            </h2>
+          </div>
+          <p className="max-w-md text-sm leading-6 text-slate-600 dark:text-slate-400">
+            Courses and certifications from NPTEL, Coursera, and Cipher School across cloud,
+            MERN, PHP, Node.js, and AI-assisted coding.
+          </p>
+        </div>
+
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {certifications.map((certification) => (
+            <article
+              key={`${certification.title}-${certification.date}`}
+              className="rounded-xl border border-slate-200 bg-stone-50 p-5 transition hover:-translate-y-1 hover:border-cyan-500 dark:border-white/10 dark:bg-white/5"
             >
-              <div className="relative h-48 overflow-hidden">
-                <img
-                  src={certification.previewImage}
-                  alt={certification.title}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent opacity-60"></div>
+              <div className="mb-5 flex h-11 w-11 items-center justify-center rounded-lg bg-amber-100 text-amber-700 dark:bg-amber-300/10 dark:text-amber-300">
+                <certification.icon className="h-5 w-5" />
               </div>
-  
-              <div className="p-6">
-                <h3 className="text-xl font-semibold mb-2">{certification.title}</h3>
-                <p className="text-gray-400 mb-1">{certification.issuer}</p>
-                <p className="text-sm text-purple-400 mb-3">{certification.date}</p>
-                <p className="text-gray-300 mb-4">{certification.description}</p>
-  
-                <a
-                  href={certification.verifyUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-4 py-2 bg-purple-500/10 text-purple-400 rounded-lg hover:bg-purple-500/20 transition-colors"
-                >
-                  <ExternalLink className="w-4 h-4" />
-                  <span>Verify Certificate</span>
-                </a>
-              </div>
-            </div>
+              <h3 className="text-lg font-semibold text-slate-950 dark:text-white">{certification.title}</h3>
+              <p className="mt-2 text-slate-600 dark:text-slate-300">{certification.issuer}</p>
+              <p className="mt-4 text-sm font-semibold text-cyan-700 dark:text-cyan-300">{certification.date}</p>
+            </article>
           ))}
         </div>
       </div>

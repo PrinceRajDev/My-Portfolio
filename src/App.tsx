@@ -1,4 +1,17 @@
-import React, { useEffect, useState, useRef } from 'react';
+import { useEffect, useMemo, useState } from 'react';
+import type React from 'react';
+import {
+  ArrowUp,
+  Award,
+  BookOpen,
+  Briefcase,
+  Code2,
+  Database,
+  GraduationCap,
+  Layout,
+  Server,
+  Terminal,
+} from 'lucide-react';
 import HeroSection from './components/HeroSection';
 import AboutSection from './components/AboutSection';
 import CertificationsSection from './components/CertificationsSection';
@@ -6,294 +19,264 @@ import ProjectsSection from './components/ProjectsSection';
 import EducationSection from './components/EducationSection';
 import ContactSection from './components/ContactSection';
 import Footer from './components/Footer';
-import Navbar from './components/Navbar'; // Import the Navbar component
+import Navbar from './components/Navbar';
 
-import { ArrowUp, Sun, Moon, Terminal, Coffee, Brain, Code2, Globe, Database, Server, Briefcase, GraduationCap } from 'lucide-react';
+export type Skill = {
+  name: string;
+  icon: React.ComponentType<{ className?: string }>;
+  description: string;
+  category: 'Language' | 'Framework' | 'Database' | 'Tool';
+};
+
+export type Project = {
+  title: string;
+  subtitle: string;
+  description: string;
+  tech: string[];
+  date: string;
+  accent: string;
+  image: string;
+  liveUrl?: string;
+  githubUrl?: string;
+};
+
+export type TimelineItem = {
+  type: 'experience' | 'training' | 'education';
+  title: string;
+  organization: string;
+  period: string;
+  description: string;
+  highlights?: string[];
+  icon: React.ComponentType<{ className?: string }>;
+};
+
+export type Certification = {
+  title: string;
+  issuer: string;
+  date: string;
+  icon: React.ComponentType<{ className?: string }>;
+};
+
+const skills: Skill[] = [
+  {
+    name: 'C++',
+    icon: Terminal,
+    description: 'Data structures, problem solving, and core programming fundamentals.',
+    category: 'Language',
+  },
+  {
+    name: 'Java',
+    icon: Code2,
+    description: 'Object-oriented programming and application logic.',
+    category: 'Language',
+  },
+  {
+    name: 'JavaScript',
+    icon: Layout,
+    description: 'Interactive UI, browser APIs, and full-stack development.',
+    category: 'Language',
+  },
+  {
+    name: 'React.js',
+    icon: Layout,
+    description: 'Responsive interfaces, reusable components, and client-side flows.',
+    category: 'Framework',
+  },
+  {
+    name: 'Node.js',
+    icon: Server,
+    description: 'Server-side JavaScript, REST APIs, and backend integration.',
+    category: 'Framework',
+  },
+  {
+    name: 'Express.js',
+    icon: Server,
+    description: 'Authentication, routes, middleware, and API architecture.',
+    category: 'Framework',
+  },
+  {
+    name: 'MongoDB',
+    icon: Database,
+    description: 'Schema design, document data models, and MERN persistence.',
+    category: 'Database',
+  },
+  {
+    name: 'MySQL',
+    icon: Database,
+    description: 'Relational data modeling and query fundamentals.',
+    category: 'Database',
+  },
+  {
+    name: 'GitHub',
+    icon: Code2,
+    description: 'Version control, collaboration, and project delivery.',
+    category: 'Tool',
+  },
+  {
+    name: 'Bootstrap',
+    icon: Layout,
+    description: 'Fast responsive layouts and production-friendly UI patterns.',
+    category: 'Framework',
+  },
+];
+
+const projects: Project[] = [
+  {
+    title: 'AI Enhanced Career Guidance System',
+    subtitle: 'AI-powered career guidance platform',
+    description:
+      'Built a MERN platform with JWT authentication and Groq Llama 3.3 integration for personalized career recommendations.',
+    tech: ['React', 'Node.js', 'Express.js', 'MongoDB', 'Groq AI', 'JWT'],
+    date: 'Feb 2026',
+    accent: 'from-cyan-400 to-emerald-400',
+    image: '/career-guide-ai.webp',
+    liveUrl: 'https://ai-enhanced-career-gidance.vercel.app/',
+    githubUrl: 'https://github.com/PrinceRajDev/Ai-enhanced-career-gidance',
+  },
+  {
+    title: 'GaonBazaar',
+    subtitle: 'Rural e-commerce platform',
+    description:
+      'Created a marketplace connecting farmers and local vendors with buyers through secure auth, product listings, and responsive interfaces.',
+    tech: ['React.js', 'Node.js', 'Express.js', 'MongoDB'],
+    date: 'Jan 2026',
+    accent: 'from-lime-400 to-amber-300',
+    image: '/gaon-bazaar.webp',
+    liveUrl: 'https://gaon-bazaar.vercel.app/',
+    githubUrl: 'https://github.com/PrinceRajDev/GaonBazaar',
+  },
+  {
+    title: 'Food del',
+    subtitle: 'Full-stack food delivery website',
+    description:
+      'Developed a mobile-first food delivery platform with order tracking, real-time availability, secure authentication, and payment-ready flows.',
+    tech: ['React.js', 'Node.js', 'Express', 'MongoDB'],
+    date: 'Sept 2024',
+    accent: 'from-orange-400 to-rose-400',
+    image: '/food-del-preview.svg',
+    githubUrl: 'https://github.com/PrinceRajDev/food-del-website',
+  },
+  {
+    title: 'Weather App',
+    subtitle: 'Interactive forecast application',
+    description:
+      'Built a responsive weather experience focused on live forecast lookup, clear UI states, and simple user interaction.',
+    tech: ['React', 'JavaScript', 'Weather API'],
+    date: 'Internship project',
+    accent: 'from-sky-400 to-indigo-400',
+    image: '/weather-app-preview.svg',
+    liveUrl: 'https://vickyyadav12t.github.io/PRODIGY_WD_05/',
+    githubUrl: 'https://github.com/vickyyadav12t/PRODIGY_WD_05',
+  },
+];
+
+const timeline: TimelineItem[] = [
+  {
+    type: 'experience',
+    title: 'Web Development Intern',
+    organization: 'Prodigy Infotech',
+    period: 'Jan 2025',
+    description:
+      'Developed five dynamic web applications using HTML, CSS, JavaScript, and React with a focus on responsive design and smooth user experience.',
+    highlights: ['Responsive landing page', 'Stopwatch app', 'Portfolio', 'Tic Tac Toe', 'Weather app'],
+    icon: Briefcase,
+  },
+  {
+    type: 'training',
+    title: 'Summer Training in Full Stack Development MERN',
+    organization: 'Cipher School',
+    period: 'July 2024',
+    description:
+      'Completed intensive MERN training and built an LMS with authentication, real-time updates, and a content editor.',
+    highlights: ['RESTful API design', 'Backend integration', 'Scalable deployment', 'Performance optimization'],
+    icon: BookOpen,
+  },
+  {
+    type: 'education',
+    title: 'B.Tech Computer Science and Engineering',
+    organization: 'Lovely Professional University, Punjab',
+    period: 'Since August 2022',
+    description:
+      'CGPA 7.48 with coursework in Object Oriented Programming, Data Structures, and MERN full-stack development.',
+    icon: GraduationCap,
+  },
+  {
+    type: 'education',
+    title: 'Intermediate',
+    organization: 'Ram Krishna College, Madhubani, Bihar',
+    period: 'April 2019 - March 2021',
+    description: 'Completed intermediate studies with 80% in Physics, Chemistry, and Mathematics.',
+    icon: GraduationCap,
+  },
+  {
+    type: 'education',
+    title: 'Matriculation',
+    organization: 'Harrow English School, Darbhanga, Bihar',
+    period: 'April 2018 - March 2019',
+    description: 'Completed matriculation with 73.4%.',
+    icon: GraduationCap,
+  },
+];
+
+const certifications: Certification[] = [
+  { title: 'Cloud Computing', issuer: 'NPTEL Certification', date: 'Nov 2024', icon: Award },
+  { title: 'Building Web Application in PHP', issuer: 'Coursera', date: 'Nov 2024', icon: Award },
+  { title: 'Full Stack Development Using MERN Stack', issuer: 'Cipher School', date: 'July 2024', icon: Award },
+  { title: 'Server-side JavaScript With Node.js', issuer: 'Coursera', date: 'May 2024', icon: Award },
+  { title: 'Learn to Code With AI', issuer: 'Coursera', date: 'April 2024', icon: Award },
+];
 
 function App() {
-  const [text, setText] = useState('');
-  const [isComplete, setIsComplete] = useState(false);
-  const [formStatus, setFormStatus] = useState('');
-  const [showScrollTop, setShowScrollTop] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(true);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isSoundEnabled, setSoundEnabled] = useState(false);
-  const [showMoreAbout, setShowMoreAbout] = useState(false);
-  const [currentGradient, setCurrentGradient] = useState(0);
-  const [funFactIndex, setFunFactIndex] = useState(0);
-  const heroRef = useRef<HTMLDivElement>(null);
-  const fullText = 'Web Developer | MERN Stack Enthusiast | React Expert | Problem Solver';
+  const [showScrollTop, setShowScrollTop] = useState(false);
+  const [formStatus, setFormStatus] = useState('');
 
-  const gradients = [
-    'from-purple-600 via-pink-600 to-blue-600',
-    'from-blue-600 via-green-600 to-purple-600',
-    'from-pink-600 via-yellow-600 to-purple-600',
-    'from-green-600 via-blue-600 to-pink-600'
-  ];
-
-  const funFacts = [
-    "I've written over 10,000 lines of code! 🚀",
-    "I debug in my dreams! 💭",
-    "Coffee is my fuel! ☕",
-    "I love solving algorithmic puzzles! 🧩"
-  ];
-
-  const programmingSkills = [
-    {
-      name: 'Python',
-      level: 85,
-      icon: Terminal,
-      description: 'Used for Data Analysis, AI/ML, and Automation',
-      color: 'from-green-500 to-blue-500'
-    },
-    {
-      name: 'Java',
-      level: 80,
-      icon: Coffee,
-      description: 'Enterprise Applications and Android Development',
-      color: 'from-red-500 to-orange-500'
-    },
-    {
-      name: 'C++',
-      level: 75,
-      icon: Brain,
-      description: 'System Programming and Competitive Coding',
-      color: 'from-blue-500 to-purple-500'
-    },
-    {
-      name: 'C',
-      level: 70,
-      icon: Terminal,
-      description: 'Low-level Programming and Embedded Systems',
-      color: 'from-gray-500 to-blue-500'
-    }
-  ];
-
-  const webSkills = [
-    {
-      name: 'HTML/CSS',
-      level: 90,
-      icon: Code2,
-      description: 'Modern, Responsive Web Design',
-      color: 'from-orange-500 to-red-500'
-    },
-    {
-      name: 'JavaScript',
-      level: 85,
-      icon: Terminal,
-      description: 'ES6+, TypeScript, Modern JS Features',
-      color: 'from-yellow-500 to-amber-500'
-    },
-    {
-      name: 'React.js',
-      level: 88,
-      icon: Globe,
-      description: 'Modern React with Hooks, Context, Redux',
-      color: 'from-blue-400 to-cyan-500'
-    },
-    {
-      name: 'Node.js',
-      level: 82,
-      icon: Terminal,
-      description: 'Server-side Development, APIs',
-      color: 'from-green-500 to-emerald-500'
-    },
-    {
-      name: 'MongoDB',
-      level: 80,
-      icon: Database,
-      description: 'Database Design, Aggregation, Indexing',
-      color: 'from-green-600 to-teal-500'
-    },
-    {
-      name: 'Express.js',
-      level: 78,
-      icon: Server,
-      description: 'RESTful APIs, Middleware, Authentication',
-      color: 'from-gray-500 to-slate-600'
-    }
-  ];
-
-  const certifications = [
-    {
-      title: 'Cloud Computing Certification',
-      issuer: 'NPTEL',
-      date: '2024',
-      description: 'Elite Certificate in Cloud Computing.',
-      verifyUrl: 'https://nptel.ac.in/noc/E_Certificate/NPTEL24CS118S95690064804211260',
-      previewImage: 'https://images.unsplash.com/photo-1621839673705-6617adf9e890?w=600&h=400&fit=crop'
-    },
-    {
-      title: 'MERN Stack Full-Stack Development',
-      issuer: 'Cipher School',
-      date: '2024',
-      description: 'Certification in MERN Stack Development.',
-      verifyUrl: 'https://www.cipherschools.com/certificate/preview?id=66a7aee32963b5cdb3a52da3',
-      previewImage: 'https://images.unsplash.com/photo-1621839673705-6617adf9e890?w=600&h=400&fit=crop'
-    },
-  ];
-
-  const projects = [
-    {
-      title: 'Food Delivery App',
-      description: 'A full-stack food delivery application with real-time order tracking and payment integration.',
-      image: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=600&h=400&fit=crop',
-      tech: ['React', 'Node.js', 'MongoDB', 'Express'],
-      liveUrl: '#',
-      githubUrl: '#'
-    },
-    {
-      title: 'Blogging Website',
-      description: 'A modern blogging platform with markdown support and user authentication.',
-      image: 'https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=600&h=400&fit=crop',
-      tech: ['React', 'Node.js', 'MongoDB', 'Express'],
-      liveUrl: '#',
-      githubUrl: '#'
-    },
-    {
-      title: 'Weather App',
-      description: 'Real-time weather application with location-based forecasts and interactive maps.',
-      image: 'https://images.unsplash.com/photo-1592210454359-9043f067919b?w=600&h=400&fit=crop',
-      tech: ['React', 'Node.js', 'OpenWeather API'],
-      liveUrl: 'https://vickyyadav12t.github.io/PRODIGY_WD_05/',
-      githubUrl: 'https://github.com/vickyyadav12t/PRODIGY_WD_05'
-    },
-    {
-      title: 'Tic-Tac-Toe',
-      description: 'Interactive Tic-Tac-Toe game with AI opponent and multiplayer support.',
-      image: 'https://images.unsplash.com/photo-1611996575749-79a3a250f948?w=600&h=400&fit=crop',
-      tech: ['React', 'Socket.io', 'Node.js'],
-      liveUrl: 'https://tic-game-gules.vercel.app/',
-      githubUrl: 'https://github.com/vickyyadav12t/PRODIGY_WD_03'
-    }
-  ];
-
-  const timeline = [
-    {
-      type: 'experience',
-      title: 'Web Development Intern',
-      organization: 'Prodigy Infotech',
-      period: 'Jan 2025 - Present',
-      description: 'Working on full-stack web development projects using MERN stack.',
-      ongoing: true,
-      icon: Briefcase
-    },
-    {
-      type: 'education',
-      title: 'Full-Stack MERN Training',
-      organization: 'Cipher School',
-      period: 'May 2024 - July 2024',
-      description: 'Intensive training in MERN Stack development and modern web technologies.',
-      ongoing: false,
-      icon: GraduationCap
-    },
-    {
-      type: 'education',
-      title: 'B.Tech Computer Science',
-      organization: 'Lovely Professional University',
-      period: '2022 - Present',
-      description: 'Pursuing Bachelor\'s degree with focus on software development and computer science fundamentals.',
-      ongoing: true,
-      icon: GraduationCap
-    },
-    {
-      type: 'education',
-      title: 'Intermediate (12th Grade)',
-      organization: 'Ram Krishna College, Bihar',
-      period: '2019 - 2021',
-      description: 'Scored 80% in 12th grade with a focus on Science and Mathematics.',
-      ongoing: false,
-      icon: GraduationCap
-    },
-    {
-      type: 'education',
-      title: 'Matriculation (10th Grade)',
-      organization: 'Harrow English School, Bihar',
-      period: '2018 - 2019',
-      description: 'Scored 73.4% in 10th grade.',
-      ongoing: false,
-      icon: GraduationCap
-    }
-  ];
-
-  const audioRef = useRef<HTMLAudioElement | null>(null);
-
-  useEffect(() => {
-    audioRef.current = new Audio('https://example.com/ambient.mp3');
+  const skillCategories = useMemo(() => {
+    return skills.reduce<Record<string, Skill[]>>((groups, skill) => {
+      groups[skill.category] = [...(groups[skill.category] || []), skill];
+      return groups;
+    }, {});
   }, []);
 
   useEffect(() => {
-    const intervalId = setInterval(() => {
-      setCurrentGradient((prev) => (prev + 1) % gradients.length);
-    }, 5000);
-    return () => clearInterval(intervalId);
-  }, []);
-
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      setFunFactIndex((prev) => (prev + 1) % funFacts.length);
-    }, 3000);
-    return () => clearInterval(intervalId);
-  }, []);
-
-  useEffect(() => {
-    let currentIndex = 0;
-    const intervalId = setInterval(() => {
-      if (currentIndex <= fullText.length) {
-        setText(fullText.slice(0, currentIndex));
-        currentIndex++;
-      } else {
-        setIsComplete(true);
-        clearInterval(intervalId);
-      }
-    }, 50);
-
     const handleScroll = () => {
+      setIsScrolled(window.scrollY > 32);
       setShowScrollTop(window.scrollY > 500);
-      setIsScrolled(window.scrollY > 20);
     };
 
+    handleScroll();
     window.addEventListener('scroll', handleScroll);
-    return () => {
-      clearInterval(intervalId);
-      window.removeEventListener('scroll', handleScroll);
-    };
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const toggleSound = () => {
-    if (audioRef.current) {
-      if (isSoundEnabled) {
-        audioRef.current.pause();
-      } else {
-        audioRef.current.play();
-      }
-      setSoundEnabled(!isSoundEnabled);
-    }
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setFormStatus('sending');
-    
-    setTimeout(() => {
-      setFormStatus('success');
-      setTimeout(() => setFormStatus(''), 3000);
-    }, 1500);
-  };
+  useEffect(() => {
+    document.documentElement.classList.toggle('dark', isDarkMode);
+  }, [isDarkMode]);
 
   const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
+    document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    const name = String(formData.get('name') || '').trim();
+    const email = String(formData.get('email') || '').trim();
+    const message = String(formData.get('message') || '').trim();
+    const subject = encodeURIComponent(`Portfolio message from ${name || 'a visitor'}`);
+    const body = encodeURIComponent(
+      [`Name: ${name}`, `Email: ${email}`, '', message].join('\n')
+    );
+
+    window.location.href = `mailto:princeroy6371@gmail.com?subject=${subject}&body=${body}`;
+    setFormStatus('success');
+    window.setTimeout(() => setFormStatus(''), 3200);
+    event.currentTarget.reset();
   };
 
   return (
-    <div className={`min-h-screen bg-gradient-to-br ${
-      isDarkMode 
-        ? 'from-gray-900 via-black to-gray-900 text-white' 
-        : 'from-gray-100 via-white to-gray-100 text-gray-900'
-    } transition-colors duration-300`}>
+    <div className="min-h-screen bg-stone-50 text-slate-950 transition-colors duration-300 dark:bg-[#08111f] dark:text-slate-50">
       <Navbar
         isDarkMode={isDarkMode}
         setIsDarkMode={setIsDarkMode}
@@ -301,40 +284,24 @@ function App() {
         scrollToSection={scrollToSection}
       />
 
-      <HeroSection
-        text={text}
-        isComplete={isComplete}
-        toggleSound={toggleSound}
-        isSoundEnabled={isSoundEnabled}
-        currentGradient={gradients[currentGradient]}
-      />
+      <main>
+        <HeroSection scrollToSection={scrollToSection} />
+        <AboutSection skillCategories={skillCategories} />
+        <ProjectsSection projects={projects} />
+        <CertificationsSection certifications={certifications} />
+        <EducationSection timeline={timeline} />
+        <ContactSection formStatus={formStatus} handleSubmit={handleSubmit} />
+      </main>
 
-      <AboutSection
-        funFacts={funFacts}
-        funFactIndex={funFactIndex}
-        showMoreAbout={showMoreAbout}
-        setShowMoreAbout={setShowMoreAbout}
-        programmingSkills={programmingSkills}
-        webSkills={webSkills}
-      />
-
-      <CertificationsSection certifications={certifications} />
-
-      <ProjectsSection projects={projects} />
-
-      <EducationSection timeline={timeline} />
-
-      <ContactSection formStatus={formStatus} handleSubmit={handleSubmit} />
-
-      <Footer isDarkMode={isDarkMode} />
+      <Footer />
 
       {showScrollTop && (
         <button
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          className="fixed bottom-8 right-8 p-3 bg-purple-500 rounded-full shadow-lg hover:bg-purple-600 transition-colors"
+          className="fixed bottom-6 right-6 z-40 inline-flex h-12 w-12 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-950 shadow-lg shadow-slate-900/10 transition hover:-translate-y-1 hover:border-cyan-500 dark:border-white/10 dark:bg-slate-950 dark:text-white"
           aria-label="Scroll to top"
         >
-          <ArrowUp className="w-6 h-6" />
+          <ArrowUp className="h-5 w-5" />
         </button>
       )}
     </div>

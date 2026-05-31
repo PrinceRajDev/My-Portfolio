@@ -1,0 +1,29 @@
+<svg width="1440" height="900" viewBox="0 0 1440 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1440" height="900" fill="#e0f2fe"/>
+  <rect x="94" y="78" width="1252" height="744" rx="38" fill="#0f172a"/>
+  <circle cx="1130" cy="248" r="126" fill="#facc15"/>
+  <circle cx="1030" cy="334" r="92" fill="#38bdf8"/>
+  <circle cx="1156" cy="348" r="116" fill="#38bdf8"/>
+  <circle cx="1274" cy="356" r="78" fill="#38bdf8"/>
+  <rect x="1004" y="348" width="354" height="86" rx="43" fill="#38bdf8"/>
+  <text x="158" y="176" fill="#e0f2fe" font-family="Inter, Arial, sans-serif" font-size="34" font-weight="800">Weather App</text>
+  <rect x="158" y="238" width="536" height="70" rx="22" fill="#1e293b" stroke="#334155" stroke-width="3"/>
+  <text x="192" y="283" fill="#94a3b8" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="600">Search city or current location</text>
+  <rect x="718" y="238" width="138" height="70" rx="22" fill="#38bdf8"/>
+  <text x="755" y="283" fill="#082f49" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="900">Find</text>
+  <text x="158" y="424" fill="#ffffff" font-family="Inter, Arial, sans-serif" font-size="92" font-weight="900">28°C</text>
+  <text x="166" y="480" fill="#bae6fd" font-family="Inter, Arial, sans-serif" font-size="30" font-weight="700">Partly cloudy · Bihar, India</text>
+  <rect x="158" y="570" width="220" height="150" rx="28" fill="#172554" stroke="#334155" stroke-width="3"/>
+  <text x="196" y="620" fill="#93c5fd" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="700">Humidity</text>
+  <text x="196" y="676" fill="#ffffff" font-family="Inter, Arial, sans-serif" font-size="46" font-weight="900">64%</text>
+  <rect x="414" y="570" width="220" height="150" rx="28" fill="#172554" stroke="#334155" stroke-width="3"/>
+  <text x="452" y="620" fill="#93c5fd" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="700">Wind</text>
+  <text x="452" y="676" fill="#ffffff" font-family="Inter, Arial, sans-serif" font-size="46" font-weight="900">12 km/h</text>
+  <rect x="670" y="570" width="220" height="150" rx="28" fill="#172554" stroke="#334155" stroke-width="3"/>
+  <text x="708" y="620" fill="#93c5fd" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="700">Forecast</text>
+  <text x="708" y="676" fill="#ffffff" font-family="Inter, Arial, sans-serif" font-size="46" font-weight="900">5 days</text>
+  <path d="M1038 602C1082 542 1146 548 1182 610C1218 566 1292 596 1288 658H1008C1000 632 1014 612 1038 602Z" fill="#e0f2fe"/>
+  <path d="M1090 692L1062 750" stroke="#38bdf8" stroke-width="16" stroke-linecap="round"/>
+  <path d="M1170 692L1142 750" stroke="#38bdf8" stroke-width="16" stroke-linecap="round"/>
+  <path d="M1250 692L1222 750" stroke="#38bdf8" stroke-width="16" stroke-linecap="round"/>
+</svg>

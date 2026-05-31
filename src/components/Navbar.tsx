@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Sun, Moon, Menu, X } from 'lucide-react';
+import { Menu, Moon, Sun, X } from 'lucide-react';
+import { useState } from 'react';
 
 interface NavbarProps {
   isDarkMode: boolean;
@@ -8,108 +8,83 @@ interface NavbarProps {
   scrollToSection: (sectionId: string) => void;
 }
 
-const Navbar: React.FC<NavbarProps> = ({ isDarkMode, setIsDarkMode, isScrolled, scrollToSection }) => {
+const navItems = [
+  { name: 'Home', id: 'home' },
+  { name: 'About', id: 'about' },
+  { name: 'Projects', id: 'projects' },
+  { name: 'Certificates', id: 'certifications' },
+  { name: 'Journey', id: 'education' },
+  { name: 'Contact', id: 'contact' },
+];
+
+const Navbar = ({ isDarkMode, setIsDarkMode, isScrolled, scrollToSection }: NavbarProps) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  const toggleMobileMenu = () => {
-    setIsMobileMenuOpen(!isMobileMenuOpen);
-  };
-
-  const handleScrollToSection = (sectionId: string) => {
+  const handleNav = (sectionId: string) => {
     scrollToSection(sectionId);
-    setIsMobileMenuOpen(false); // Close mobile menu after clicking a link
+    setIsMobileMenuOpen(false);
   };
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed inset-x-0 top-0 z-50 border-b transition duration-300 ${
         isScrolled
-          ? `${isDarkMode ? 'bg-black/80' : 'bg-white/80'} backdrop-blur-lg shadow-lg`
-          : 'bg-transparent'
+          ? 'border-slate-200 bg-stone-50/90 shadow-sm backdrop-blur dark:border-white/10 dark:bg-[#08111f]/90'
+          : 'border-transparent bg-transparent'
       }`}
     >
-      <div className="max-w-6xl mx-auto px-4">
-        <div className="flex items-center justify-between h-16">
-          <a
-            href="#"
-            className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-500 text-transparent bg-clip-text hover:glow-effect transition-all"
+      <div className="mx-auto max-w-6xl px-4">
+        <div className="flex h-16 items-center justify-between">
+          <button
+            onClick={() => handleNav('home')}
+            className="flex items-center gap-3 text-left"
+            aria-label="Go to home"
           >
-            PR
-          </a>
+            <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-slate-950 text-sm font-bold text-white dark:bg-cyan-300 dark:text-slate-950">
+              PR
+            </span>
+            <span className="hidden text-sm font-semibold text-slate-800 sm:block dark:text-slate-100">
+              Prince Raj
+            </span>
+          </button>
 
-          {/* Desktop Navigation Links */}
-          <div className="hidden md:flex items-center space-x-8">
-            {[
-              { name: 'Home', id: 'home' },
-              { name: 'About Me', id: 'about' },
-              { name: 'Projects', id: 'projects' },
-              { name: 'Education', id: 'education' },
-              { name: 'Contact Me', id: 'contact' },
-            ].map((item) => (
+          <div className="hidden items-center gap-1 md:flex">
+            {navItems.map((item) => (
               <button
                 key={item.id}
-                onClick={() => scrollToSection(item.id)}
-                className={`nav-link-underline py-2 ${
-                  isDarkMode
-                    ? 'text-gray-300 hover:text-purple-400'
-                    : 'text-gray-600 hover:text-purple-600'
-                } transition-colors hover:glow-effect`}
+                onClick={() => handleNav(item.id)}
+                className="rounded-lg px-3 py-2 text-sm font-medium text-slate-600 transition hover:bg-slate-100 hover:text-slate-950 dark:text-slate-300 dark:hover:bg-white/10 dark:hover:text-white"
               >
                 {item.name}
               </button>
             ))}
           </div>
 
-          {/* Mobile Menu Toggle Button */}
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center gap-2">
             <button
               onClick={() => setIsDarkMode(!isDarkMode)}
-              className={`p-2 rounded-full ${
-                isDarkMode
-                  ? 'bg-gray-800 hover:bg-gray-700'
-                  : 'bg-gray-200 hover:bg-gray-300'
-              } transition-colors`}
-              aria-label="Toggle theme"
+              className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-slate-200 bg-white text-slate-700 transition hover:border-cyan-500 dark:border-white/10 dark:bg-white/5 dark:text-slate-200"
+              aria-label="Toggle color theme"
             >
-              {isDarkMode ? (
-                <Sun className="w-5 h-5" />
-              ) : (
-                <Moon className="w-5 h-5" />
-              )}
+              {isDarkMode ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
             </button>
-
             <button
-              onClick={toggleMobileMenu}
-              className="md:hidden p-2 rounded-full focus:outline-none"
-              aria-label="Toggle mobile menu"
+              onClick={() => setIsMobileMenuOpen((open) => !open)}
+              className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-slate-200 bg-white text-slate-700 transition md:hidden dark:border-white/10 dark:bg-white/5 dark:text-slate-200"
+              aria-label="Toggle navigation menu"
             >
-              {isMobileMenuOpen ? (
-                <X className="w-5 h-5" />
-              ) : (
-                <Menu className="w-5 h-5" />
-              )}
+              {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </button>
           </div>
         </div>
 
-        {/* Mobile Navigation Links */}
         {isMobileMenuOpen && (
-          <div className="md:hidden mt-4 pb-4">
-            {[
-              { name: 'Home', id: 'home' },
-              { name: 'About Me', id: 'about' },
-              { name: 'Projects', id: 'projects' },
-              { name: 'Education', id: 'education' },
-              { name: 'Contact Me', id: 'contact' },
-            ].map((item) => (
+          <div className="mb-3 grid gap-1 rounded-xl border border-slate-200 bg-white/95 p-2 shadow-lg shadow-slate-950/10 backdrop-blur md:hidden dark:border-white/10 dark:bg-slate-950/95">
+            {navItems.map((item) => (
               <button
                 key={item.id}
-                onClick={() => handleScrollToSection(item.id)}
-                className={`block w-full text-left py-2 px-4 ${
-                  isDarkMode
-                    ? 'text-gray-300 hover:text-purple-400'
-                    : 'text-gray-600 hover:text-purple-600'
-                } transition-colors hover:bg-gray-100/10`}
+                onClick={() => handleNav(item.id)}
+                className="rounded-lg px-3 py-3 text-left text-sm font-medium text-slate-700 transition hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-white/10"
               >
                 {item.name}
               </button>
