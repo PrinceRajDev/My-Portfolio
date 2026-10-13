@@ -25,6 +25,10 @@
     @apply bg-stone-50 font-sans antialiased dark:bg-[#08111f];
   }
 
+  :focus-visible {
+    @apply outline outline-2 outline-offset-2 outline-cyan-500;
+  }
+
   ::selection {
     @apply bg-cyan-300 text-slate-950;
   }
@@ -39,5 +43,16 @@
 
   ::-webkit-scrollbar-thumb {
     @apply rounded-full bg-slate-300 dark:bg-slate-700;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      scroll-behavior: auto !important;
+      transition-duration: 0.01ms !important;
+    }
   }
 }

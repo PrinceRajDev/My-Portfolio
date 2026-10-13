@@ -2,11 +2,12 @@ import { ArrowDown, ExternalLink, FileDown, Github, Linkedin, Mail, MapPin, Phon
 
 interface HeroSectionProps {
   scrollToSection: (sectionId: string) => void;
+  isRecruiterMode: boolean;
 }
 
 const highlights = ['MERN Stack', 'AI Integration', '5 Internship Projects', 'B.Tech CSE'];
 
-const HeroSection = ({ scrollToSection }: HeroSectionProps) => {
+const HeroSection = ({ scrollToSection, isRecruiterMode }: HeroSectionProps) => {
   return (
     <section id="home" className="relative isolate overflow-hidden px-4 pt-24 sm:pt-32">
       <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top_left,rgba(20,184,166,0.22),transparent_32%),radial-gradient(circle_at_75%_20%,rgba(251,146,60,0.18),transparent_30%)] dark:bg-[radial-gradient(circle_at_top_left,rgba(34,211,238,0.18),transparent_32%),radial-gradient(circle_at_75%_20%,rgba(251,191,36,0.12),transparent_30%)]" />
@@ -36,7 +37,11 @@ const HeroSection = ({ scrollToSection }: HeroSectionProps) => {
             ))}
           </div>
 
-          <div className="mt-8 flex flex-wrap gap-3">
+          <div
+            className={`mt-8 flex flex-wrap gap-3 rounded-xl transition ${
+              isRecruiterMode ? 'ring-4 ring-cyan-300/40 ring-offset-4 ring-offset-stone-50 dark:ring-offset-[#08111f]' : ''
+            }`}
+          >
             <a
               href="/Princecv.pdf"
               download

@@ -2,15 +2,16 @@ import type { Skill } from '../App';
 
 interface AboutSectionProps {
   skillCategories: Record<string, Skill[]>;
+  isRecruiterMode: boolean;
 }
 
 const stats = [
   { value: '5+', label: 'Internship projects' },
-  { value: '7.48', label: 'Current CGPA' },
+  { value: '7.61', label: 'Current CGPA' },
   { value: 'MERN', label: 'Core stack' },
 ];
 
-const AboutSection = ({ skillCategories }: AboutSectionProps) => {
+const AboutSection = ({ skillCategories, isRecruiterMode }: AboutSectionProps) => {
   return (
     <section id="about" className="px-4 py-20">
       <div className="mx-auto max-w-6xl">
@@ -48,7 +49,11 @@ const AboutSection = ({ skillCategories }: AboutSectionProps) => {
             </div>
           </div>
 
-          <div className="grid gap-4 sm:grid-cols-2">
+          <div
+            className={`grid gap-4 rounded-xl transition ${
+              isRecruiterMode ? 'ring-4 ring-cyan-300/40 ring-offset-4 ring-offset-stone-50 sm:grid-cols-2 dark:ring-offset-[#08111f]' : 'sm:grid-cols-2'
+            }`}
+          >
             {Object.entries(skillCategories).map(([category, categorySkills]) => (
               <div
                 key={category}

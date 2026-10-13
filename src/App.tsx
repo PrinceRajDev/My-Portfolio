@@ -146,7 +146,7 @@ const projects: Project[] = [
     githubUrl: 'https://github.com/PrinceRajDev/GaonBazaar',
   },
   {
-    title: 'Food del',
+    title: 'Food Delivery',
     subtitle: 'Full-stack food delivery website',
     description:
       'Developed a mobile-first food delivery platform with order tracking, real-time availability, secure authentication, and payment-ready flows.',
@@ -173,6 +173,16 @@ const projects: Project[] = [
 const timeline: TimelineItem[] = [
   {
     type: 'experience',
+    title: 'QA Tester Intern',
+    organization: 'Zealthix Technologies',
+    period: 'September 2026 - Present',
+    description:
+      'Testing Java-based backend modules and REST APIs through manual, functional, regression, and Postman-based API testing.',
+    highlights: ['Test case design', 'Bug tracking', 'Postman', 'SQL validation'],
+    icon: Briefcase,
+  },
+  {
+    type: 'experience',
     title: 'Web Development Intern',
     organization: 'Prodigy Infotech',
     period: 'Jan 2025',
@@ -197,7 +207,7 @@ const timeline: TimelineItem[] = [
     organization: 'Lovely Professional University, Punjab',
     period: 'Since August 2022',
     description:
-      'CGPA 7.48 with coursework in Object Oriented Programming, Data Structures, and MERN full-stack development.',
+      'CGPA 7.61 with coursework in Object Oriented Programming, Database Management Systems, and Web Development.',
     icon: GraduationCap,
   },
   {
@@ -227,10 +237,12 @@ const certifications: Certification[] = [
 ];
 
 function App() {
-  const [isDarkMode, setIsDarkMode] = useState(true);
+  const [isDarkMode, setIsDarkMode] = useState(() => localStorage.getItem('theme') !== 'light');
   const [isScrolled, setIsScrolled] = useState(false);
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [formStatus, setFormStatus] = useState('');
+  const [isRecruiterMode, setIsRecruiterMode] = useState(false);
+  const [activeSection, setActiveSection] = useState('home');
 
   const skillCategories = useMemo(() => {
     return skills.reduce<Record<string, Skill[]>>((groups, skill) => {
@@ -252,10 +264,38 @@ function App() {
 
   useEffect(() => {
     document.documentElement.classList.toggle('dark', isDarkMode);
+    localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
   }, [isDarkMode]);
+
+  useEffect(() => {
+    const sections = Array.from(document.querySelectorAll<HTMLElement>('main section[id]'));
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visibleSection = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+
+        if (visibleSection) setActiveSection(visibleSection.target.id);
+      },
+      { rootMargin: '-28% 0px -58%', threshold: [0.05, 0.2, 0.5] }
+    );
+
+    sections.forEach((section) => observer.observe(section));
+    return () => observer.disconnect();
+  }, []);
 
   const scrollToSection = (sectionId: string) => {
     document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const toggleRecruiterMode = () => {
+    setIsRecruiterMode((active) => {
+      const nextValue = !active;
+      if (!active) {
+        window.setTimeout(() => scrollToSection('home'), 0);
+      }
+      return nextValue;
+    });
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -282,18 +322,56 @@ function App() {
         setIsDarkMode={setIsDarkMode}
         isScrolled={isScrolled}
         scrollToSection={scrollToSection}
+        isRecruiterMode={isRecruiterMode}
+        toggleRecruiterMode={toggleRecruiterMode}
+        activeSection={activeSection}
       />
 
       <main>
-        <HeroSection scrollToSection={scrollToSection} />
-        <AboutSection skillCategories={skillCategories} />
-        <ProjectsSection projects={projects} />
+        <HeroSection scrollToSection={scrollToSection} isRecruiterMode={isRecruiterMode} />
+        <AboutSection skillCategories={skillCategories} isRecruiterMode={isRecruiterMode} />
+        <ProjectsSection projects={projects} isRecruiterMode={isRecruiterMode} />
         <CertificationsSection certifications={certifications} />
         <EducationSection timeline={timeline} />
-        <ContactSection formStatus={formStatus} handleSubmit={handleSubmit} />
+        <ContactSection formStatus={formStatus} handleSubmit={handleSubmit} isRecruiterMode={isRecruiterMode} />
       </main>
 
       <Footer />
+
+      {isRecruiterMode && (
+        <aside className="fixed bottom-6 left-4 right-4 z-40 rounded-xl border border-cyan-300/50 bg-slate-950/95 p-4 text-white shadow-2xl shadow-cyan-950/30 backdrop-blur sm:left-auto sm:right-6 sm:w-80">
+          <div className="flex items-start justify-between gap-4">
+            <div>
+              <p className="text-sm font-semibold text-cyan-200">Recruiter Mode</p>
+              <p className="mt-1 text-xs leading-5 text-slate-300">
+                Fast path to the most relevant hiring signals.
+              </p>
+            </div>
+            <button
+              onClick={() => setIsRecruiterMode(false)}
+              className="rounded-md px-2 py-1 text-xs font-semibold text-slate-300 hover:bg-white/10 hover:text-white"
+            >
+              Close
+            </button>
+          </div>
+          <div className="mt-4 grid grid-cols-2 gap-2 text-sm">
+            {[
+              { label: 'Resume', id: 'home' },
+              { label: 'Skills', id: 'about' },
+              { label: 'Top projects', id: 'projects' },
+              { label: 'Contact', id: 'contact' },
+            ].map((item) => (
+              <button
+                key={item.id}
+                onClick={() => scrollToSection(item.id)}
+                className="rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-left font-semibold text-slate-100 hover:border-cyan-300 hover:bg-cyan-300 hover:text-slate-950"
+              >
+                {item.label}
+              </button>
+            ))}
+          </div>
+        </aside>
+      )}
 
       {showScrollTop && (
         <button

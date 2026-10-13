@@ -4,9 +4,10 @@ import type React from 'react';
 interface ContactSectionProps {
   formStatus: string;
   handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
+  isRecruiterMode: boolean;
 }
 
-const ContactSection = ({ formStatus, handleSubmit }: ContactSectionProps) => {
+const ContactSection = ({ formStatus, handleSubmit, isRecruiterMode }: ContactSectionProps) => {
   return (
     <section id="contact" className="bg-slate-950 px-4 py-20 text-white">
       <div className="mx-auto grid max-w-6xl gap-10 lg:grid-cols-[0.85fr_1.15fr]">
@@ -48,13 +49,20 @@ const ContactSection = ({ formStatus, handleSubmit }: ContactSectionProps) => {
           </div>
         </div>
 
-        <form onSubmit={handleSubmit} className="rounded-xl border border-white/10 bg-white/[0.04] p-5 shadow-2xl shadow-black/20">
+        <form
+          onSubmit={handleSubmit}
+          noValidate={false}
+          className={`rounded-xl border border-white/10 bg-white/[0.04] p-5 shadow-2xl shadow-black/20 transition ${
+            isRecruiterMode ? 'ring-4 ring-cyan-300/40' : ''
+          }`}
+        >
           <div className="grid gap-4 sm:grid-cols-2">
             <label className="block">
               <span className="text-sm font-medium text-slate-300">Name</span>
               <input
                 required
                 name="name"
+                autoComplete="name"
                 className="mt-2 w-full rounded-lg border border-white/10 bg-white/10 px-4 py-3 text-white outline-none transition placeholder:text-slate-500 focus:border-cyan-300"
                 placeholder="Your name"
               />
@@ -65,6 +73,7 @@ const ContactSection = ({ formStatus, handleSubmit }: ContactSectionProps) => {
                 required
                 type="email"
                 name="email"
+                autoComplete="email"
                 className="mt-2 w-full rounded-lg border border-white/10 bg-white/10 px-4 py-3 text-white outline-none transition placeholder:text-slate-500 focus:border-cyan-300"
                 placeholder="you@example.com"
               />
@@ -88,7 +97,7 @@ const ContactSection = ({ formStatus, handleSubmit }: ContactSectionProps) => {
             Send Message
           </button>
           {formStatus === 'success' && (
-            <p className="mt-4 rounded-lg bg-emerald-400/10 px-4 py-3 text-center text-sm font-medium text-emerald-200">
+            <p role="status" aria-live="polite" className="mt-4 rounded-lg bg-emerald-400/10 px-4 py-3 text-center text-sm font-medium text-emerald-200">
               Your email app is opening with the message ready to send.
             </p>
           )}

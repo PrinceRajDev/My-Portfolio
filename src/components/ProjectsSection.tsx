@@ -3,9 +3,10 @@ import type { Project } from '../App';
 
 interface ProjectsSectionProps {
   projects: Project[];
+  isRecruiterMode: boolean;
 }
 
-const ProjectsSection = ({ projects }: ProjectsSectionProps) => {
+const ProjectsSection = ({ projects, isRecruiterMode }: ProjectsSectionProps) => {
   return (
     <section id="projects" className="bg-slate-950 px-4 py-20 text-white">
       <div className="mx-auto max-w-6xl">
@@ -23,10 +24,12 @@ const ProjectsSection = ({ projects }: ProjectsSectionProps) => {
         </div>
 
         <div className="grid gap-5 md:grid-cols-2">
-          {projects.map((project) => (
+          {projects.map((project, index) => (
             <article
               key={project.title}
-              className="group overflow-hidden rounded-xl border border-white/10 bg-white/[0.04] transition hover:-translate-y-1 hover:border-cyan-300/60 hover:bg-white/[0.07]"
+              className={`group overflow-hidden rounded-xl border border-white/10 bg-white/[0.04] transition hover:-translate-y-1 hover:border-cyan-300/60 hover:bg-white/[0.07] ${
+                isRecruiterMode && index < 2 ? 'ring-4 ring-amber-300/35' : ''
+              }`}
             >
               <div className="relative aspect-[16/10] overflow-hidden border-b border-white/10 bg-slate-900">
                 <img
