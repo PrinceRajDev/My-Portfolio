@@ -1,12 +1,2 @@
-const Footer = () => {
-  return (
-    <footer className="border-t border-slate-200 bg-stone-50 px-4 py-8 text-slate-600 dark:border-white/10 dark:bg-[#08111f] dark:text-slate-400">
-      <div className="mx-auto flex max-w-6xl flex-col justify-between gap-3 text-sm sm:flex-row">
-        <p>Copyright {new Date().getFullYear()} Prince Raj.</p>
-        <p>Built with React, TypeScript, and Tailwind CSS.</p>
-      </div>
-    </footer>
-  );
-};
-
+const Footer = () => <footer className="bg-[#171717] px-4 py-7 text-[#f5f2ea] sm:px-6 lg:px-10"><div className="mx-auto flex max-w-[88rem] flex-col justify-between gap-3 font-mono text-[10px] uppercase tracking-[0.12em] text-white/55 sm:flex-row"><p>Prince Raj / {new Date().getFullYear()}</p><p>React, TypeScript & Tailwind CSS</p><a href="mailto:princeroy6371@gmail.com" className="hover:text-white">Email</a></div></footer>;
 export default Footer;

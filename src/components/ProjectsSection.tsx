@@ -1,103 +1,18 @@
 import { ArrowUpRight, Code2, Globe } from 'lucide-react';
 import type { Project } from '../App';
+interface ProjectsSectionProps { projects: Project[]; isRecruiterMode: boolean; }
 
-interface ProjectsSectionProps {
-  projects: Project[];
-  isRecruiterMode: boolean;
-}
+const ProjectLinks = ({ project }: { project: Project }) => <div className="mt-6 flex flex-wrap gap-5 font-mono text-[10px] uppercase tracking-[0.12em]">{project.liveUrl && <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 border-b border-[#171717]/25 pb-1 hover:border-[#3155e7] hover:text-[#3155e7] dark:border-white/25"><Globe className="h-3.5 w-3.5" /> Live project</a>}{project.githubUrl && <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 border-b border-[#171717]/25 pb-1 hover:border-[#3155e7] hover:text-[#3155e7] dark:border-white/25"><Code2 className="h-3.5 w-3.5" /> Source</a>}</div>;
 
 const ProjectsSection = ({ projects, isRecruiterMode }: ProjectsSectionProps) => {
-  return (
-    <section id="projects" className="bg-slate-950 px-4 py-20 text-white">
-      <div className="mx-auto max-w-6xl">
-        <div className="mb-10 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
-          <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.28em] text-amber-300">
-              Projects
-            </p>
-            <h2 className="mt-3 text-3xl font-bold sm:text-4xl">Selected work from my CV</h2>
-          </div>
-          <p className="max-w-md text-sm leading-6 text-slate-300">
-            These projects show my range across MERN architecture, authentication, AI integration,
-            marketplaces, and responsive user interfaces.
-          </p>
-        </div>
-
-        <div className="grid gap-5 md:grid-cols-2">
-          {projects.map((project, index) => (
-            <article
-              key={project.title}
-              className={`group overflow-hidden rounded-xl border border-white/10 bg-white/[0.04] transition hover:-translate-y-1 hover:border-cyan-300/60 hover:bg-white/[0.07] ${
-                isRecruiterMode && index < 2 ? 'ring-4 ring-amber-300/35' : ''
-              }`}
-            >
-              <div className="relative aspect-[16/10] overflow-hidden border-b border-white/10 bg-slate-900">
-                <img
-                  src={project.image}
-                  alt={`${project.title} project preview`}
-                  className="h-full w-full object-cover object-top transition duration-500 group-hover:scale-[1.03]"
-                  loading="lazy"
-                />
-                <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-slate-950/90 to-transparent" />
-                <div className={`absolute left-5 top-5 h-2 w-24 rounded-full bg-gradient-to-r ${project.accent}`} />
-              </div>
-
-              <div className="p-5">
-                <div className="flex items-start justify-between gap-4">
-                  <div>
-                    <p className="text-sm font-medium text-slate-400">{project.date}</p>
-                    <h3 className="mt-2 text-2xl font-bold">{project.title}</h3>
-                    <p className="mt-1 text-cyan-200">{project.subtitle}</p>
-                  </div>
-                  <ArrowUpRight className="h-6 w-6 shrink-0 text-slate-500 transition group-hover:text-cyan-300" />
-                </div>
-
-                <p className="mt-5 leading-7 text-slate-300">{project.description}</p>
-
-                <div className="mt-5 flex flex-wrap gap-2">
-                  {project.tech.map((tech) => (
-                    <span
-                      key={tech}
-                      className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-sm text-slate-200"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-
-                {(project.liveUrl || project.githubUrl) && (
-                  <div className="mt-6 flex flex-wrap gap-4 text-sm font-semibold">
-                    {project.liveUrl && (
-                      <a
-                        href={project.liveUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 text-cyan-200 hover:text-white"
-                      >
-                        <Globe className="h-4 w-4" />
-                        Live demo
-                      </a>
-                    )}
-                    {project.githubUrl && (
-                      <a
-                        href={project.githubUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 text-cyan-200 hover:text-white"
-                      >
-                        <Code2 className="h-4 w-4" />
-                        Source code
-                      </a>
-                    )}
-                  </div>
-                )}
-              </div>
-            </article>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
+  const [featured, ...supporting] = projects;
+  return <section id="projects" className="bg-[#171717] px-4 py-20 text-[#f5f2ea] sm:px-6 lg:px-10 lg:py-28"><div className="mx-auto max-w-[88rem]">
+    <div className="grid gap-6 border-b border-white/15 pb-10 lg:grid-cols-12"><p className="font-mono text-[10px] uppercase tracking-[0.16em] text-[#93a6ff] lg:col-span-3">01 / Selected work</p><h2 className="max-w-3xl font-display text-5xl leading-[0.9] tracking-[-0.055em] sm:text-6xl lg:col-span-7 lg:text-7xl">Engineering work, told with clarity.</h2><p className="max-w-xs self-end text-sm leading-6 text-white/65 lg:col-span-2">A focused collection of product work across AI, marketplaces, and everyday interfaces.</p></div>
+    <article className={`grid gap-0 py-10 lg:grid-cols-12 lg:py-16 ${isRecruiterMode ? 'outline outline-2 outline-[#93a6ff] outline-offset-8' : ''}`}>
+      <div className="relative overflow-hidden bg-[#262626] lg:col-span-8"><img src={featured.image} alt={`${featured.title} project preview`} className="aspect-[16/9] h-full w-full object-cover object-top transition duration-700 hover:scale-[1.025]" /><span className="absolute left-0 top-0 bg-[#3155e7] px-3 py-2 font-mono text-[10px] uppercase tracking-[0.13em]">Featured / 01</span></div>
+      <div className="flex flex-col justify-between border border-white/15 p-6 sm:p-8 lg:col-span-4 lg:border-l-0"><div><p className="font-mono text-[10px] uppercase tracking-[0.14em] text-white/55">{featured.date} / {featured.subtitle}</p><h3 className="mt-7 font-display text-4xl leading-[0.92] tracking-[-0.045em] sm:text-5xl">{featured.title}</h3><p className="mt-6 text-sm leading-7 text-white/70">{featured.description}</p></div><div><div className="mt-8 border-t border-white/15 pt-4 font-mono text-[10px] uppercase tracking-[0.1em] text-white/60">{featured.tech.join(' / ')}</div><ProjectLinks project={featured} /></div></div>
+    </article>
+    <div className="grid gap-8 border-t border-white/15 pt-10 md:grid-cols-2">{supporting.map((project, index) => <article key={project.title} className={`group ${index === 1 ? 'md:mt-16' : ''}`}><div className="relative overflow-hidden bg-[#262626]"><img src={project.image} alt={`${project.title} project preview`} loading="lazy" className="aspect-[16/10] w-full object-cover object-top transition duration-700 group-hover:scale-[1.03]" /><span className="absolute bottom-0 right-0 bg-[#f5f2ea] px-3 py-2 font-mono text-[10px] tracking-[0.12em] text-[#171717]">0{index + 2}</span></div><div className="mt-5 grid grid-cols-[1fr_auto] gap-4"><div><p className="font-mono text-[10px] uppercase tracking-[0.14em] text-white/55">{project.date}</p><h3 className="mt-3 font-display text-4xl leading-none tracking-[-0.045em]">{project.title}</h3></div><ArrowUpRight className="h-5 w-5 text-[#93a6ff]" /></div><p className="mt-4 max-w-xl text-sm leading-6 text-white/70">{project.description}</p><p className="mt-5 font-mono text-[10px] uppercase leading-5 tracking-[0.1em] text-white/55">{project.tech.join(' / ')}</p><ProjectLinks project={project} /></article>)}</div>
+  </div></section>;
 };
-
 export default ProjectsSection;

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=DM+Serif+Display:ital@0;1&family=IBM+Plex+Mono:wght@400;500&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -22,15 +22,15 @@
   }
 
   body {
-    @apply bg-stone-50 font-sans antialiased dark:bg-[#08111f];
+    @apply bg-[#f5f2ea] font-sans antialiased text-[#171717] dark:bg-[#17191f] dark:text-[#f5f2ea];
   }
 
   :focus-visible {
-    @apply outline outline-2 outline-offset-2 outline-cyan-500;
+    @apply outline outline-2 outline-offset-4 outline-[#3155e7];
   }
 
   ::selection {
-    @apply bg-cyan-300 text-slate-950;
+    @apply bg-[#3155e7] text-white;
   }
 
   ::-webkit-scrollbar {
@@ -38,11 +38,11 @@
   }
 
   ::-webkit-scrollbar-track {
-    @apply bg-stone-100 dark:bg-slate-950;
+    @apply bg-[#ece8df] dark:bg-[#101217];
   }
 
   ::-webkit-scrollbar-thumb {
-    @apply rounded-full bg-slate-300 dark:bg-slate-700;
+    @apply rounded-full bg-[#b9b3a9] dark:bg-[#454956];
   }
 
   @media (prefers-reduced-motion: reduce) {

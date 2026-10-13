@@ -1,56 +1,7 @@
 import type { TimelineItem } from '../App';
-
-interface EducationSectionProps {
-  timeline: TimelineItem[];
-}
-
-const EducationSection = ({ timeline }: EducationSectionProps) => {
-  return (
-    <section id="education" className="px-4 py-20">
-      <div className="mx-auto max-w-6xl">
-        <div className="mb-12 max-w-2xl">
-          <p className="text-sm font-semibold uppercase tracking-[0.28em] text-cyan-700 dark:text-cyan-300">
-            Journey
-          </p>
-          <h2 className="mt-3 text-3xl font-bold text-slate-950 sm:text-4xl dark:text-white">
-            Experience, training, and education
-          </h2>
-        </div>
-
-        <div className="relative space-y-5 before:absolute before:left-5 before:top-2 before:h-[calc(100%-1rem)] before:w-px before:bg-slate-200 dark:before:bg-white/10">
-          {timeline.map((item) => (
-            <article key={`${item.title}-${item.period}`} className="relative pl-16">
-              <div className="absolute left-0 top-1 flex h-10 w-10 items-center justify-center rounded-lg border border-slate-200 bg-white text-cyan-700 shadow-sm dark:border-white/10 dark:bg-slate-950 dark:text-cyan-300">
-                <item.icon className="h-5 w-5" />
-              </div>
-              <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm dark:border-white/10 dark:bg-white/5">
-                <div className="flex flex-col justify-between gap-2 sm:flex-row sm:items-start">
-                  <div>
-                    <h3 className="text-xl font-semibold text-slate-950 dark:text-white">{item.title}</h3>
-                    <p className="mt-1 font-medium text-cyan-700 dark:text-cyan-300">{item.organization}</p>
-                  </div>
-                  <p className="text-sm font-semibold text-slate-500 dark:text-slate-400">{item.period}</p>
-                </div>
-                <p className="mt-4 leading-7 text-slate-700 dark:text-slate-300">{item.description}</p>
-                {item.highlights && (
-                  <div className="mt-4 flex flex-wrap gap-2">
-                    {item.highlights.map((highlight) => (
-                      <span
-                        key={highlight}
-                        className="rounded-full bg-slate-100 px-3 py-1 text-sm text-slate-700 dark:bg-white/10 dark:text-slate-300"
-                      >
-                        {highlight}
-                      </span>
-                    ))}
-                  </div>
-                )}
-              </div>
-            </article>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-};
-
+interface EducationSectionProps { timeline: TimelineItem[]; }
+const EducationSection = ({ timeline }: EducationSectionProps) => <section id="education" className="px-4 py-20 sm:px-6 lg:px-10 lg:py-28"><div className="mx-auto max-w-[88rem]">
+  <div className="grid gap-6 lg:grid-cols-12"><p className="font-mono text-[10px] uppercase tracking-[0.16em] text-[#3155e7] lg:col-span-3">04 / Chronology</p><div className="lg:col-span-8"><h2 className="font-display text-5xl leading-[0.92] tracking-[-0.055em] sm:text-6xl">Learning in public, building in practice.</h2></div></div>
+  <div className="mt-14 border-t border-[#171717]/15 dark:border-white/15">{timeline.map((item, index) => <article key={`${item.title}-${item.period}`} className="grid gap-4 border-b border-[#171717]/15 py-7 sm:grid-cols-[8rem_1fr] lg:grid-cols-[12rem_1fr_2fr] dark:border-white/15"><p className="font-mono text-[10px] uppercase tracking-[0.12em] text-[#3155e7]">{item.period}</p><div><p className="font-mono text-[10px] uppercase tracking-[0.12em] text-[#171717]/50 dark:text-white/50">0{index + 1} / {item.type}</p><h3 className="mt-3 text-xl font-semibold tracking-[-0.025em]">{item.title}</h3><p className="mt-1 text-sm text-[#171717]/65 dark:text-white/60">{item.organization}</p></div><div><p className="text-sm leading-6 text-[#171717]/70 dark:text-white/65">{item.description}</p>{item.highlights && <p className="mt-4 font-mono text-[10px] uppercase leading-5 tracking-[0.08em] text-[#171717]/50 dark:text-white/50">{item.highlights.join(' / ')}</p>}</div></article>)}</div>
+</div></section>;
 export default EducationSection;

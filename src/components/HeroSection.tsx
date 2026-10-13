@@ -1,122 +1,37 @@
-import { ArrowDown, ExternalLink, FileDown, Github, Linkedin, Mail, MapPin, Phone } from 'lucide-react';
+import { ArrowDownRight, FileDown, Github, Linkedin, MapPin } from 'lucide-react';
 
 interface HeroSectionProps {
   scrollToSection: (sectionId: string) => void;
   isRecruiterMode: boolean;
 }
 
-const highlights = ['MERN Stack', 'AI Integration', '5 Internship Projects', 'B.Tech CSE'];
-
-const HeroSection = ({ scrollToSection, isRecruiterMode }: HeroSectionProps) => {
-  return (
-    <section id="home" className="relative isolate overflow-hidden px-4 pt-24 sm:pt-32">
-      <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top_left,rgba(20,184,166,0.22),transparent_32%),radial-gradient(circle_at_75%_20%,rgba(251,146,60,0.18),transparent_30%)] dark:bg-[radial-gradient(circle_at_top_left,rgba(34,211,238,0.18),transparent_32%),radial-gradient(circle_at_75%_20%,rgba(251,191,36,0.12),transparent_30%)]" />
-      <div className="mx-auto grid max-w-6xl items-center gap-8 pb-14 sm:gap-12 lg:min-h-[calc(100vh-5rem)] lg:grid-cols-[1.1fr_0.9fr] lg:pb-16">
-        <div className="max-w-3xl">
-          <div className="mb-5 inline-flex max-w-full items-center gap-2 rounded-full border border-slate-200 bg-white/80 px-3 py-2 text-sm font-medium text-slate-700 shadow-sm backdrop-blur dark:border-white/10 dark:bg-white/5 dark:text-slate-200 sm:mb-6 sm:px-4">
-            <span className="h-2 w-2 rounded-full bg-emerald-500" />
-            <span className="truncate">MERN Stack Developer open to opportunities</span>
-          </div>
-
-          <h1 className="text-4xl font-bold leading-tight text-slate-950 sm:text-6xl lg:text-7xl dark:text-white">
-            Prince Raj
-          </h1>
-          <p className="mt-4 max-w-2xl text-lg leading-8 text-slate-700 sm:mt-5 sm:text-xl dark:text-slate-300">
-            Computer Science student and full-stack developer building practical MERN applications,
-            AI-assisted products, and responsive interfaces that feel clear from the first click.
-          </p>
-
-          <div className="mt-6 flex flex-wrap gap-2.5 sm:mt-7 sm:gap-3">
-            {highlights.map((highlight) => (
-              <span
-                key={highlight}
-                className="rounded-lg border border-slate-200 bg-white/75 px-3 py-2 text-sm font-semibold text-slate-800 shadow-sm backdrop-blur transition hover:-translate-y-0.5 hover:border-cyan-500 dark:border-white/10 dark:bg-white/5 dark:text-slate-100 sm:px-4"
-              >
-                {highlight}
-              </span>
-            ))}
-          </div>
-
-          <div
-            className={`mt-8 flex flex-wrap gap-3 rounded-xl transition ${
-              isRecruiterMode ? 'ring-4 ring-cyan-300/40 ring-offset-4 ring-offset-stone-50 dark:ring-offset-[#08111f]' : ''
-            }`}
-          >
-            <a
-              href="/Princecv.pdf"
-              download
-              className="inline-flex items-center gap-2 rounded-lg bg-slate-950 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-slate-950/15 transition hover:-translate-y-0.5 hover:bg-cyan-700 dark:bg-cyan-400 dark:text-slate-950 dark:hover:bg-cyan-300"
-            >
-              <FileDown className="h-5 w-5" />
-              Download CV
-            </a>
-            <a
-              href="/Princecv.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-lg border border-slate-300 bg-white/80 px-5 py-3 text-sm font-semibold text-slate-900 transition hover:-translate-y-0.5 hover:border-cyan-500 dark:border-white/15 dark:bg-white/5 dark:text-white"
-            >
-              <ExternalLink className="h-5 w-5" />
-              View CV
-            </a>
-            <button
-              onClick={() => scrollToSection('projects')}
-              className="inline-flex items-center gap-2 rounded-lg border border-slate-300 bg-white/80 px-5 py-3 text-sm font-semibold text-slate-900 transition hover:-translate-y-0.5 hover:border-cyan-500 dark:border-white/15 dark:bg-white/5 dark:text-white"
-            >
-              <ArrowDown className="h-5 w-5" />
-              View Projects
-            </button>
-          </div>
-
-          <div className="mt-8 flex flex-wrap gap-x-6 gap-y-3 text-sm text-slate-600 dark:text-slate-300">
-            <a className="inline-flex items-center gap-2 hover:text-cyan-700 dark:hover:text-cyan-300" href="mailto:princeroy6371@gmail.com">
-              <Mail className="h-4 w-4" />
-              princeroy6371@gmail.com
-            </a>
-            <a className="inline-flex items-center gap-2 hover:text-cyan-700 dark:hover:text-cyan-300" href="tel:+916203135782">
-              <Phone className="h-4 w-4" />
-              +91 6203135782
-            </a>
-            <span className="inline-flex items-center gap-2">
-              <MapPin className="h-4 w-4" />
-              Bihar, India
-            </span>
+const HeroSection = ({ scrollToSection, isRecruiterMode }: HeroSectionProps) => (
+  <section id="home" className="px-4 pb-14 pt-28 sm:px-6 sm:pt-36 lg:px-10 lg:pb-20">
+    <div className="mx-auto grid max-w-[88rem] border-y border-[#171717]/15 pt-6 dark:border-white/15 lg:grid-cols-12">
+      <div className="flex items-center justify-between border-b border-[#171717]/15 pb-4 font-mono text-[10px] uppercase tracking-[0.16em] text-[#171717]/60 dark:border-white/15 dark:text-white/55 lg:col-span-12">
+        <span>Portfolio / 2026</span><span>Bihar, India</span>
+      </div>
+      <div className="relative py-10 lg:col-span-8 lg:border-r lg:border-[#171717]/15 lg:py-16 dark:lg:border-white/15">
+        <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[#3155e7]">Full stack developer</p>
+        <h1 className="mt-5 max-w-4xl font-display text-[clamp(4rem,10vw,9.8rem)] leading-[0.79] tracking-[-0.065em] text-[#171717] dark:text-[#f5f2ea]">Prince<br />Raj<span className="text-[#3155e7]">.</span></h1>
+        <div className="mt-9 grid max-w-2xl gap-6 sm:grid-cols-[1fr_auto] sm:items-end">
+          <p className="text-base leading-7 text-[#171717]/75 dark:text-white/70">I build practical web applications across the MERN stack, from responsive interfaces to API-connected products and AI-assisted tools.</p>
+          <div className="flex gap-2 text-sm">
+            <a aria-label="Prince Raj on GitHub" href="https://github.com/PrinceRajDev" target="_blank" rel="noopener noreferrer" className="grid h-10 w-10 place-items-center border border-[#171717]/20 transition hover:bg-[#3155e7] hover:text-white dark:border-white/20"><Github className="h-4 w-4" /></a>
+            <a aria-label="Prince Raj on LinkedIn" href="https://linkedin.com/in/prince-raj2003/" target="_blank" rel="noopener noreferrer" className="grid h-10 w-10 place-items-center border border-[#171717]/20 transition hover:bg-[#3155e7] hover:text-white dark:border-white/20"><Linkedin className="h-4 w-4" /></a>
           </div>
         </div>
-
-        <div className="relative mx-auto w-full max-w-[15rem] sm:max-w-sm lg:max-w-md">
-          <div className="absolute -inset-6 rounded-[2rem] bg-gradient-to-br from-cyan-300/30 via-transparent to-amber-300/30 blur-2xl" />
-          <div className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-3 shadow-2xl shadow-slate-900/10 dark:border-white/10 dark:bg-white/5 dark:shadow-black/30 sm:p-4">
-            <img
-              src="/profile.webp"
-              alt="Prince Raj"
-              className="aspect-square w-full rounded-xl object-cover object-top sm:aspect-[4/5]"
-            />
-            <div className="mt-4 grid grid-cols-2 gap-3 text-sm">
-              <a
-                href="https://github.com/PrinceRajDev"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 rounded-lg bg-slate-100 px-3 py-3 font-semibold text-slate-800 transition hover:bg-slate-200 dark:bg-white/10 dark:text-white dark:hover:bg-white/15"
-              >
-                <Github className="h-4 w-4" />
-                GitHub
-              </a>
-              <a
-                href="https://linkedin.com/in/prince-raj2003/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 rounded-lg bg-slate-100 px-3 py-3 font-semibold text-slate-800 transition hover:bg-slate-200 dark:bg-white/10 dark:text-white dark:hover:bg-white/15"
-              >
-                <Linkedin className="h-4 w-4" />
-                LinkedIn
-              </a>
-            </div>
-          </div>
+        <div className={`mt-10 flex flex-wrap gap-x-6 gap-y-4 ${isRecruiterMode ? 'outline outline-4 outline-[#3155e7]/30 outline-offset-8' : ''}`}>
+          <button onClick={() => scrollToSection('projects')} className="group inline-flex items-center gap-3 border-b-2 border-[#171717] pb-2 text-sm font-bold uppercase tracking-[0.08em] transition hover:border-[#3155e7] hover:text-[#3155e7] dark:border-[#f5f2ea]">View selected work <ArrowDownRight className="h-4 w-4 transition-transform group-hover:translate-x-1 group-hover:translate-y-1" /></button>
+          <a href="/Princecv.pdf" download className="group inline-flex items-center gap-3 border-b-2 border-transparent pb-2 text-sm font-bold uppercase tracking-[0.08em] text-[#3155e7] transition hover:border-[#3155e7]">Download CV <FileDown className="h-4 w-4" /></a>
         </div>
       </div>
-    </section>
-  );
-};
+      <div className="relative flex flex-col justify-between py-8 lg:col-span-4 lg:py-16 lg:pl-8">
+        <div className="ml-auto w-full max-w-[21rem]"><div className="relative overflow-hidden bg-[#d9d4ca] p-3 dark:bg-[#282b33]"><span className="absolute left-3 top-3 z-10 bg-[#3155e7] px-2 py-1 font-mono text-[9px] uppercase tracking-[0.14em] text-white">Open to work</span><img src="/profile.webp" alt="Prince Raj" className="aspect-[4/5] w-full object-cover object-top grayscale transition duration-500 hover:grayscale-0" /></div><div className="mt-3 flex items-start justify-between font-mono text-[10px] uppercase tracking-[0.12em] text-[#171717]/60 dark:text-white/55"><span>PR / 01</span><span className="inline-flex items-center gap-1"><MapPin className="h-3 w-3" /> Bihar</span></div></div>
+        <p className="mt-12 max-w-xs border-l-2 border-[#3155e7] pl-4 text-sm leading-6 text-[#171717]/70 dark:text-white/65">B.Tech CSE student. Building with React, Node.js, Express, MongoDB, and a careful testing mindset.</p>
+      </div>
+    </div>
+  </section>
+);
 
 export default HeroSection;

@@ -237,7 +237,7 @@ const certifications: Certification[] = [
 ];
 
 function App() {
-  const [isDarkMode, setIsDarkMode] = useState(() => localStorage.getItem('theme') !== 'light');
+  const [isDarkMode, setIsDarkMode] = useState(() => localStorage.getItem('theme') === 'dark');
   const [isScrolled, setIsScrolled] = useState(false);
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [formStatus, setFormStatus] = useState('');
@@ -316,7 +316,7 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-stone-50 text-slate-950 transition-colors duration-300 dark:bg-[#08111f] dark:text-slate-50">
+    <div className="min-h-screen overflow-x-hidden bg-[#f5f2ea] text-[#171717] transition-colors duration-300 dark:bg-[#17191f] dark:text-[#f5f2ea]">
       <Navbar
         isDarkMode={isDarkMode}
         setIsDarkMode={setIsDarkMode}
@@ -339,17 +339,17 @@ function App() {
       <Footer />
 
       {isRecruiterMode && (
-        <aside className="fixed bottom-6 left-4 right-4 z-40 rounded-xl border border-cyan-300/50 bg-slate-950/95 p-4 text-white shadow-2xl shadow-cyan-950/30 backdrop-blur sm:left-auto sm:right-6 sm:w-80">
+        <aside className="fixed bottom-5 left-4 right-4 z-40 border border-[#171717]/15 bg-[#171717] p-4 text-[#f5f2ea] shadow-[8px_8px_0_0_rgba(49,85,231,0.9)] sm:left-auto sm:right-6 sm:w-80 dark:border-white/15 dark:bg-[#f5f2ea] dark:text-[#171717]">
           <div className="flex items-start justify-between gap-4">
             <div>
-              <p className="text-sm font-semibold text-cyan-200">Recruiter Mode</p>
-              <p className="mt-1 text-xs leading-5 text-slate-300">
+              <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-[#8aa0ff] dark:text-[#3155e7]">Recruiter Mode</p>
+              <p className="mt-1 text-xs leading-5 text-white/70 dark:text-[#171717]/70">
                 Fast path to the most relevant hiring signals.
               </p>
             </div>
             <button
               onClick={() => setIsRecruiterMode(false)}
-              className="rounded-md px-2 py-1 text-xs font-semibold text-slate-300 hover:bg-white/10 hover:text-white"
+              className="px-2 py-1 text-xs font-semibold text-white/70 hover:bg-white/10 hover:text-white dark:text-[#171717]/70 dark:hover:bg-black/5 dark:hover:text-[#171717]"
             >
               Close
             </button>
@@ -364,7 +364,7 @@ function App() {
               <button
                 key={item.id}
                 onClick={() => scrollToSection(item.id)}
-                className="rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-left font-semibold text-slate-100 hover:border-cyan-300 hover:bg-cyan-300 hover:text-slate-950"
+                className="border border-white/15 px-3 py-2 text-left font-semibold transition hover:border-[#3155e7] hover:bg-[#3155e7] hover:text-white dark:border-[#171717]/15"
               >
                 {item.label}
               </button>
@@ -376,7 +376,7 @@ function App() {
       {showScrollTop && (
         <button
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          className="fixed bottom-6 right-6 z-40 inline-flex h-12 w-12 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-950 shadow-lg shadow-slate-900/10 transition hover:-translate-y-1 hover:border-cyan-500 dark:border-white/10 dark:bg-slate-950 dark:text-white"
+          className="fixed bottom-6 right-6 z-40 inline-flex h-12 w-12 items-center justify-center border border-[#171717]/20 bg-[#f5f2ea] text-[#171717] shadow-[4px_4px_0_0_#3155e7] transition hover:-translate-y-1 dark:border-white/20 dark:bg-[#17191f] dark:text-[#f5f2ea]"
           aria-label="Scroll to top"
         >
           <ArrowUp className="h-5 w-5" />
