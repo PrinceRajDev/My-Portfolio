@@ -175,7 +175,8 @@ const timeline: TimelineItem[] = [
     title: 'Frontend Intern',
     organization: 'Zealthix Technologies',
     period: 'September 2026 - Present',
-    description: 'Frontend internship at Zealthix Technologies.',
+    description:
+      'Frontend internship focused on building user-facing web interfaces, with attention to responsive design, usability, and a consistent experience across devices.',
     icon: Briefcase,
   },
   {
