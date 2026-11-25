@@ -172,12 +172,10 @@ const projects: Project[] = [
 const timeline: TimelineItem[] = [
   {
     type: 'experience',
-    title: 'QA Tester Intern',
+    title: 'Frontend Intern',
     organization: 'Zealthix Technologies',
     period: 'September 2026 - Present',
-    description:
-      'Testing Java-based backend modules and REST APIs through manual, functional, regression, and Postman-based API testing.',
-    highlights: ['Test case design', 'Bug tracking', 'Postman', 'SQL validation'],
+    description: 'Frontend internship at Zealthix Technologies.',
     icon: Briefcase,
   },
   {
