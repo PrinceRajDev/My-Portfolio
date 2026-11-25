@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 750" role="img" aria-labelledby="title">
+  <title id="title">JustPackIt project title</title>
+  <rect width="1200" height="750" fill="#e8e4dc"/>
+  <path d="M65 80H1135M65 670H1135" stroke="#171717" stroke-opacity=".3"/>
+  <text x="65" y="145" font-family="monospace" font-size="22" letter-spacing="4" fill="#3155e7">SELECTED WORK / WEB PROJECT</text>
+  <text x="65" y="420" font-family="Georgia, serif" font-size="140" letter-spacing="-7" fill="#171717">JustPackIt<tspan fill="#3155e7">.</tspan></text>
+  <text x="65" y="630" font-family="monospace" font-size="20" letter-spacing="3" fill="#555">JUSTPACKIT.VERCEL.APP</text>
+</svg>

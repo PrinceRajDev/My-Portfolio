@@ -146,15 +146,14 @@ const projects: Project[] = [
     githubUrl: 'https://github.com/PrinceRajDev/GaonBazaar',
   },
   {
-    title: 'Food Delivery',
-    subtitle: 'Full-stack food delivery website',
-    description:
-      'Developed a mobile-first food delivery platform with order tracking, real-time availability, secure authentication, and payment-ready flows.',
-    tech: ['React.js', 'Node.js', 'Express', 'MongoDB'],
-    date: 'Sept 2024',
+    title: 'JustPackIt',
+    subtitle: 'Web application',
+    description: 'Explore the live JustPackIt project.',
+    tech: [],
+    date: 'Web project',
     accent: 'from-orange-400 to-rose-400',
-    image: '/food-del-preview.svg',
-    githubUrl: 'https://github.com/PrinceRajDev/food-del-website',
+    image: '/justpackit-preview.svg',
+    liveUrl: 'https://justpackit.vercel.app/',
   },
   {
     title: 'Weather App',
