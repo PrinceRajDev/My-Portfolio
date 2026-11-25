@@ -147,12 +147,12 @@ const projects: Project[] = [
   },
   {
     title: 'JustPackIt',
-    subtitle: 'Web application',
-    description: 'Explore the live JustPackIt project.',
+    subtitle: 'Neighbourhood marketplace',
+    description: 'A neighbourhood marketplace for discovering local shops and shopping across product categories.',
     tech: [],
     date: 'Web project',
     accent: 'from-orange-400 to-rose-400',
-    image: '/justpackit-preview.svg',
+    image: '/justpackit-screenshot.png',
     liveUrl: 'https://justpackit.vercel.app/',
   },
   {
