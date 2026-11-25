@@ -283,7 +283,8 @@ function App() {
   }, []);
 
   const scrollToSection = (sectionId: string) => {
-    document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    document.getElementById(sectionId)?.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth' });
   };
 
   const toggleRecruiterMode = () => {
@@ -310,7 +311,6 @@ function App() {
     window.location.href = `mailto:princeroy6371@gmail.com?subject=${subject}&body=${body}`;
     setFormStatus('success');
     window.setTimeout(() => setFormStatus(''), 3200);
-    event.currentTarget.reset();
   };
 
   return (
